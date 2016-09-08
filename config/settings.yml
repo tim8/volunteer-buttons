@@ -1,0 +1,7 @@
+plugins:
+  volunteerbuttons_enabled:
+    default: true
+    client: true
+  volunteerbuttons_categoryid:
+    default: 11
+    client: 11

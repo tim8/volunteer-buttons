@@ -53,7 +53,7 @@ export default function volunteerSyntax($elem, post)
 		elem.after('<button class="btn btn-small volunteering" disabled><i class="fa fa-spinner fa-spin"></i> Updating...</button>');
 		elem.hide();
 		AjaxLib.ajax({
-			url: 'https://api.vigglerumors.com/volunteer/'+ type +'/'+ show,
+			url: '//api.vigglerumors.com/volunteer/'+ type +'/'+ show,
 			type: 'PUT',
 			data: 'user=' + user + (remove == true ? '&unvolunteer=true':'')
 		});

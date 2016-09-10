@@ -8,6 +8,7 @@ registerOption((siteSettings, opts) => {
 
 export function setup(helper) {
   helper.whiteList([ 
+    'span[volunteer]',
     'button[volunteer]',
     'button[show]',
     'button[title]',
@@ -31,7 +32,7 @@ export function setup(helper) {
       var show = contents[1];
       if(contents[2]){
         var user          = contents[2];
-        return ['span',
+        return ['span',{'class':'volunteer'},
           ['button', {
               'class' : 'btn btn-small volunteer-button volunteered',
               'show': show,
@@ -57,14 +58,14 @@ export function setup(helper) {
       var show = contents[1];
       if(contents[2]){
         var user          = contents[2];
-        return ['span',
+        return ['span',{'class':'volunteer'},
           ['button', {
               'class' : 'btn btn-small volunteer-button volunteered',
               'show': show,
               'volunteer': 'trivia',
               'user': user,
               'title': user + ' has volunteered for this trivia'
-          }, '<i class="fa fa-check-square-o"></i> ' ],
+          }, '<i class="fa fa-check-square-o"></i> ' ],' ',
           ['a', {'class': 'mention', href: '/users/' + user.toLowerCase()},'@' + user ]
         ];
       }

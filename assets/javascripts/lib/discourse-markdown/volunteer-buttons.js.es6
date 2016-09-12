@@ -27,7 +27,7 @@ export function setup(helper) {
 
   helper.inlineRegexp({
     start: '[vs:',
-    matcher: /^\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9]+))?\]/i,
+    matcher: /^\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
     emitter: function(contents) {
       var show = contents[1];
       if(contents[2]){
@@ -53,7 +53,7 @@ export function setup(helper) {
   });
   helper.inlineRegexp({
     start: '[vt:',
-    matcher: /^\[vt:([a-z]{2}\d{12})(?:\:([a-z0-9]+))?\]/i,
+    matcher: /^\[vt:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
     emitter: function(contents) {
       var show = contents[1];
       if(contents[2]){

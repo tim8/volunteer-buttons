@@ -12,7 +12,7 @@ function initializePlugin(api)
   }
 }
 
-export default function volunteerSyntax($elem, post)
+export function volunteerSyntax($elem, post)
 {
 	if (!post) { return; }
 	var 	age 	= new Date() - new Date(topic.created_at),

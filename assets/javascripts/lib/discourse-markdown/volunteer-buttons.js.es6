@@ -70,7 +70,7 @@ function buttonize(buffer, contents, state) {
     buffer.push(token);
 
     token = new state.Token('icon', 'i', 0);
-    token.attrs = [['class', icon];
+    token.attrs = [['class', icon]];
     buffer.push(token);
 
     token = new state.Token('text', '', 0);

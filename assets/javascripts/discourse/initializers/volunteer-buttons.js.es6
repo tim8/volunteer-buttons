@@ -63,7 +63,7 @@ export function volunteerSyntax($elem, post)
 
 export default {
   name: 'volunteerbuttons',
-  initialize: function(container)
+  initialize: function()
   {
     withPluginApi('0.1', api => initializePlugin(api));
   }

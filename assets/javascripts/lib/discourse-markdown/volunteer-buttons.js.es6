@@ -108,9 +108,10 @@ export function setup(helper) {
   });
 
   helper.registerPlugin(md=>{
-    const rule = {
+    const rule1 = {
       matcher: /^\[(vs|vt):([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
       onMatch: buttonize
     };
+    md.core.textPostProcess.ruler.push('volunteer', rule1);
    });
 }

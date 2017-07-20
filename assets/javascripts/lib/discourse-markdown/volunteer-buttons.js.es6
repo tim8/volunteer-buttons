@@ -110,11 +110,7 @@ export function setup(helper) {
   helper.whiteList({
     custom(tag, name, value) {
       if (tag === 'button' && name === 'show') {
-        const m = /^[a-zA-Z]{2}\d{12}/.exec(value);
-        if (m) {
-          return helper.getOptions().acceptableCodeClasses.indexOf(m[1]) !== -1;
-        }
-
+        return  /^[a-zA-Z]{2}\d{12}/.exec(value);
       }
     }
   });
@@ -131,7 +127,7 @@ export function setup(helper) {
       matcher: /^\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
       onMatch: buttonize
     };
-    md.core.textPostProcess.ruler.push('volunteer-buttons', buttons);
+    md.inline.push('volunteer-buttons', buttons);
 
   });
 }

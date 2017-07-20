@@ -1,7 +1,7 @@
 import { registerOption } from 'pretty-text/pretty-text';
 
 registerOption((siteSettings, opts) => {
-  opts.features['volunteerbuttons'] = true;
+  opts.features['volunteer-buttons'] = true;
 });
 
 function buttonize(buffer, matches, state) {
@@ -87,7 +87,7 @@ function buttonize(buffer, matches, state) {
 
 export function setup(helper) {
   helper.registerOptions((opts, siteSettings) => {
-    opts.features['volunteerbuttons'] = !!siteSettings.volunteerbuttons_enabled;
+    opts.features['volunteer-buttons'] = !!siteSettings.volunteerbuttons_enabled;
   });
   helper.whiteList([ 
     'span[volunteer]',
@@ -127,12 +127,11 @@ export function setup(helper) {
   });
 
   helper.registerPlugin(md=>{
-    const ruler = md.core.textPostProcess.ruler;
     const buttons = {
       matcher: /^\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
       onMatch: buttonize
     };
-    ruler.push('volunteer', buttons);
+    md.core.textPostProcess.ruler.push('volunteer-buttons', buttons);
 
   });
 }

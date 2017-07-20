@@ -134,4 +134,6 @@ export function setup(helper) {
     };
     ruler.push('volunteer', buttons);
 
+
+   });
 }

@@ -1,7 +1,7 @@
 import { registerOption } from 'pretty-text/pretty-text';
 
 registerOption((siteSettings, opts) => {
-  opts.features['volunteer-buttons'] = true;
+  opts.features['volunteerbuttons'] = true;
 });
 
 function buttonize(buffer, matches, state) {
@@ -87,7 +87,7 @@ function buttonize(buffer, matches, state) {
 
 export function setup(helper) {
   helper.registerOptions((opts, siteSettings) => {
-    opts.features['volunteer-buttons'] = !!siteSettings.volunteer-buttons_enabled;
+    opts.features['volunteerbuttons'] = !!siteSettings.volunteerbuttons_enabled;
   });
   helper.whiteList([ 
     'span[volunteer]',

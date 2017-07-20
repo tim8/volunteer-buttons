@@ -129,11 +129,10 @@ export function setup(helper) {
   helper.registerPlugin(md=>{
     const ruler = md.core.textPostProcess.ruler;
     const buttons = {
-      matcher: /^\[(vs|vt):([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
+      matcher: /^\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
       onMatch: buttonize
     };
     ruler.push('volunteer', buttons);
 
-
-   });
+  });
 }

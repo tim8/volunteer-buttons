@@ -87,7 +87,7 @@ function buttonize(buffer, matches, state) {
 
 export function setup(helper) {
   helper.registerOptions((opts, siteSettings) => {
-    opts.features['spoiler-alert'] = !!siteSettings.spoiler_enabled;
+    opts.features['volunteer-buttons'] = !!siteSettings.volunteer-buttons_enabled;
   });
   helper.whiteList([ 
     'span[volunteer]',

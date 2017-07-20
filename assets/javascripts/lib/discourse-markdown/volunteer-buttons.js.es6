@@ -5,6 +5,7 @@ registerOption((siteSettings, opts) => {
 });
 
 function buttonize(buffer, matches, state) {
+  console.log(matches);
   let type  = matches[1];
   let show  = matches[2];
   let tag   = 'button';
@@ -97,7 +98,14 @@ export function setup(helper) {
     'button[user]',
     'button.btn btn-small volunteer-button',
     'button.btn btn-small volunteer-button volunteered',
-    'i'
+    'span.chcklst-stroked',
+    'span.chcklst-box fa fa-square-o',
+    'span.chcklst-box fa fa-square',
+    'span.chcklst-box fa fa-minus-square-o',
+    'span.chcklst-box checked fa fa-check-square',
+    'span.chcklst-box checked fa fa-check-square-o',
+    'i[class]',
+    'font[color]'
   ]);
   helper.whiteList({
     custom(tag, name, value) {
@@ -110,12 +118,44 @@ export function setup(helper) {
       }
     }
   });
+  helper.whiteList({
+    custom(tag, name, value) {
+      if (tag === 'span' && name === 'style') {
+        return /^background-color:.*$/.exec(value);
+      }
+    }
+  });
 
   helper.registerPlugin(md=>{
-    const rule1 = {
+    const ruler = md.core.textPostProcess.ruler;
+    const buttons = {
       matcher: /^\[(vs|vt):([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
       onMatch: buttonize
     };
-    md.core.textPostProcess.ruler.push('volunteer', rule1);
-   });
+    ruler.push('volunteer', buttons);
+/*
+    const sound = {
+      matcher: /^\[sound:(\d\d?[xX])?\:?([0-9]+)?\]/,
+      onMatch: soundDetails
+    };
+    ruler.push('soundDetails', sound);
+
+    const trivia = {
+      matcher: /^\[trivia(?:\:(.*?))?\](.*?)\[\/trivia\]/,
+      onMatch: triviaDetails
+    };
+    ruler.push('triviaDetails', trivia);
+
+    const fa = {
+      matcher: /^\[fa:([a-z-]+)\]/,
+      onMatch: FontAwesome
+    };
+    ruler.push('FontAwesome', fa);
+
+    const vr = {
+      matcher: /^\[vr:([0-9a-z-]+)\]/,
+      onMatch: viggleFonts
+    };
+    ruler.push('viggleFonts', vr);
+   });*/
 }

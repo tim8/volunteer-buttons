@@ -133,29 +133,5 @@ export function setup(helper) {
       onMatch: buttonize
     };
     ruler.push('volunteer', buttons);
-/*
-    const sound = {
-      matcher: /^\[sound:(\d\d?[xX])?\:?([0-9]+)?\]/,
-      onMatch: soundDetails
-    };
-    ruler.push('soundDetails', sound);
 
-    const trivia = {
-      matcher: /^\[trivia(?:\:(.*?))?\](.*?)\[\/trivia\]/,
-      onMatch: triviaDetails
-    };
-    ruler.push('triviaDetails', trivia);
-
-    const fa = {
-      matcher: /^\[fa:([a-z-]+)\]/,
-      onMatch: FontAwesome
-    };
-    ruler.push('FontAwesome', fa);
-
-    const vr = {
-      matcher: /^\[vr:([0-9a-z-]+)\]/,
-      onMatch: viggleFonts
-    };
-    ruler.push('viggleFonts', vr);
-   });*/
 }

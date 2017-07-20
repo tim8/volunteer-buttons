@@ -4,9 +4,9 @@ registerOption((siteSettings, opts) => {
   opts.features['volunteer-buttons'] = true;
 });
 
-function buttonize(buffer, contents, state) {
-  let type  = contents[1];
-  let show  = contents[2];
+function buttonize(buffer, matches, state) {
+  let type  = matches[1];
+  let show  = matches[2];
   let tag   = 'button';
   let icon  = null;
 
@@ -18,8 +18,8 @@ function buttonize(buffer, contents, state) {
     icon  = 'vri-live';
   }
 
-  if(contents[3]){
-    let user = contents[3];
+  if(matches[3]){
+    let user = matches[3];
     icon  = 'fa fa-check-square-o';
     let token = new state.Token('volunteer_open', 'span', 1);
     token.attrs = [['class', 'volunteer']];
@@ -102,7 +102,11 @@ export function setup(helper) {
   helper.whiteList({
     custom(tag, name, value) {
       if (tag === 'button' && name === 'show') {
-        return /^[a-zA-Z]{2}\d{12}/.exec(value);
+        const m = /^[a-zA-Z]{2}\d{12}/.exec(value);
+        if (m) {
+          return helper.getOptions().acceptableCodeClasses.indexOf(m[1]) !== -1;
+        }
+
       }
     }
   });

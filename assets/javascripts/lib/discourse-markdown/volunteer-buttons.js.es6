@@ -4,14 +4,14 @@ registerOption((siteSettings, opts) => {
   opts.features['volunteer-buttons'] = true;
 });
 
-function buttonize(buffer, matches, state) {
+function addButton(buffer, matches, state) {
   console.log(matches);
   let type  = matches[1];
   let show  = matches[2];
   let tag   = 'button';
   let icon  = null;
   let token;
-  
+
   if(type === 'vs'){
     type  = 'sound';
     icon  = 'vri-tv-v';
@@ -21,9 +21,13 @@ function buttonize(buffer, matches, state) {
   }
 
   if(matches[3]){
-    let user = matches[3];
+    let user  = matches[3];
+    let title = user + ' has volunteered for this ' + type;
+    let href  = '/users/' + user.toLowerCase();
     icon  = 'fa fa-check-square-o';
-    let token = new state.Token('volunteer_open', 'span', 1);
+    
+
+    token = new state.Token('volunteer_open', 'span', 1);
     token.attrs = [['class', 'volunteer']];
     buffer.push(token);
 
@@ -32,8 +36,8 @@ function buttonize(buffer, matches, state) {
       ['class', 'btn btn-small volunteer-button volunteered'],
       ['show',show],
       ['volunteer',type],
-      ['user','user'],
-      ['title',user + ' has volunteered for this ' + type]
+      ['user',user],
+      ['title',title]
     ];
     buffer.push(token);
 
@@ -45,7 +49,7 @@ function buttonize(buffer, matches, state) {
     token = new state.Token('mention_open', 'a', 1);
     token.attrs = [
       ['class', 'mention'],
-      ['href','/users/' + user.toLowerCase()]
+      ['href',href]
     ];
     buffer.push(token);
 
@@ -62,12 +66,14 @@ function buttonize(buffer, matches, state) {
     token = new state.Token('volunteer_close', tag, -1);
     buffer.push(token);
   } else {
-    let token = new state.Token('button_open', 'button', 1);
+    let title = 'Volunteer for this ' + type;
+
+    token = new state.Token('button_open', 'button', 1);
     token.attrs = [
       ['class', 'btn btn-small volunteer-button'],
       ['show',show],
       ['volunteer',type],
-      ['title','Volunteer for this ' + type]
+      ['title',title]
     ];
     buffer.push(token);
 
@@ -123,7 +129,7 @@ export function setup(helper) {
   helper.registerPlugin(md => {
     const buttons = {
       matcher: /\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
-      onMatch: buttonize
+      onMatch: addButton
     };
     md.core.textPostProcess.ruler.push('volunteer-buttons', buttons);
 

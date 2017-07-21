@@ -131,6 +131,7 @@ export function setup(helper) {
       matcher: /\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
       onMatch: addButton
     };
+    console.log(buttons);
     md.block.bbcode.ruler.push('volunteer-buttons', buttons);
 
   });

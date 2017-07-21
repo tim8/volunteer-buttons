@@ -44,6 +44,8 @@ function addButton(buffer, matches, state)
 		buffer.push(token);
 		token = new state.Token('icon_close', 'i', -1);
 		buffer.push(token);
+		token = new state.Token('buttton_close', tag, -1);
+		buffer.push(token);
 		token = new state.Token('mention_open', 'a', 1);
 		token.attrs = [
 			['class', 'mention'],
@@ -54,8 +56,6 @@ function addButton(buffer, matches, state)
 		token.content = '@'+user;
 		buffer.push(token);
 		token = new state.Token('mention_close', tag, -1);
-		buffer.push(token);
-		token = new state.Token('buttton_close', tag, -1);
 		buffer.push(token);
 		token = new state.Token('volunteer_close', tag, -1);
 		buffer.push(token);
@@ -108,15 +108,16 @@ function soundDetails(buffer, matches, state)
 			token.content = matches[1] + ' ';
 			buffer.push(token);
 		}
-	if(matches[2]){
-		token.content = '(' + matches[2] + ' pts)';
+		if(matches[2]){
+			token = new state.Token('text', '', 0);
+			token.content = '(' + matches[2] + ' pts)';
 			buffer.push(token);
-	}
+		}
 		token = new state.Token('strong_close', 'strong', -1);
 		buffer.push(token);
 		token = new state.Token('font_close', 'font', -1);
 		token.attrs = [['color', color]];
-		buffer.push(token);
+	buffer.push(token);
 }
 
 export function setup(helper) {
@@ -157,7 +158,7 @@ export function setup(helper) {
 		const ruler = md.core.textPostProcess.ruler;
 
 		ruler.push('volunteer-buttons', {
-			matcher: /\[(vs|vt):([A-Z]{2}\d{12})(?::([A-Za-z0-9_-]))?\]/,
+			matcher: /\[(vs|vt):([A-Z]{2}\d{12})(?::([A-Za-z0-9_-]+))?\]/,
 			onMatch: addButton
 		});
 

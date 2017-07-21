@@ -44,7 +44,7 @@ function addButton(buffer, matches, state)
 		buffer.push(token);
 		token = new state.Token('icon_close', 'i', -1);
 		buffer.push(token);
-		token = new state.Token('buttton_close', tag, -1);
+		token = new state.Token('buttton_close', 'button', -1);
 		buffer.push(token);
 		token = new state.Token('mention_open', 'a', 1);
 		token.attrs = [
@@ -55,9 +55,9 @@ function addButton(buffer, matches, state)
 		token = new state.Token('text', '', 0);
 		token.content = '@'+user;
 		buffer.push(token);
-		token = new state.Token('mention_close', tag, -1);
+		token = new state.Token('mention_close', 'a', -1);
 		buffer.push(token);
-		token = new state.Token('volunteer_close', tag, -1);
+		token = new state.Token('volunteer_close', 'span', -1);
 		buffer.push(token);
 	} else {
 		let title = 'Volunteer for this ' + type;
@@ -88,13 +88,14 @@ function addButton(buffer, matches, state)
 
 function soundDetails(buffer, matches, state)
 {
+	let token;
 	if(matches[1] > 2){
 		let color = 'red';
 	}else{
 		let color   = 'gray';
 	}
 
-	let token = new state.Token('icon_open', 'i', 1);
+	token = new state.Token('icon_open', 'i', 1);
 	token.attrs = [['class', 'vri-tv-v']];
 	buffer.push(token);
 	token = new state.Token('icon_close', 'i', -1);
@@ -120,7 +121,8 @@ function soundDetails(buffer, matches, state)
 	buffer.push(token);
 }
 function triviaDetails(buffer, matches, state){
-	let token = new state.Token('icon_open', 'i', 1);
+	let token;
+	token = new state.Token('icon_open', 'i', 1);
 	token.attrs = [['class', 'vri-live']];
 	buffer.push(token);
 	token = new state.Token('icon_close', 'i', -1);

@@ -88,13 +88,13 @@ function addButton(buffer, matches, state)
 
 function soundDetails(buffer, matches, state)
 {
-	let token;
 	if(matches[1] > 2){
 		let color = 'red';
 	}else{
 		let color   = 'gray';
 	}
-	token = new state.Token('icon_open', 'i', 1);
+
+	let token = new state.Token('icon_open', 'i', 1);
 	token.attrs = [['class', 'vri-tv-v']];
 	buffer.push(token);
 	token = new state.Token('icon_close', 'i', -1);
@@ -120,12 +120,11 @@ function soundDetails(buffer, matches, state)
 	buffer.push(token);
 }
 function triviaDetails(buffer, matches, state){
-	let token;
-    token = new state.Token('icon_open', 'i', 1);
-    token.attrs = [['class', 'vri-live']];
-    buffer.push(token);
-    token = new state.Token('icon_close', 'i', -1);
-    buffer.push(token);
+	let token = new state.Token('icon_open', 'i', 1);
+	token.attrs = [['class', 'vri-live']];
+	buffer.push(token);
+	token = new state.Token('icon_close', 'i', -1);
+	buffer.push(token);
 	token = new state.Token('text', '', 0);
 	token.content = ' ';
 	buffer.push(token);
@@ -134,24 +133,40 @@ function triviaDetails(buffer, matches, state){
 		token.attrs = [['href', '//vigglerumors.com/trivia/' + matches[1]]];
 		buffer.push(token);
 	}
-    token = new state.Token('font_open', 'font', 1);
-    token.attrs = [['color', 'orange']];
-    buffer.push(token);
-    token = new state.Token('strong_open', 'strong', 1);
-    buffer.push(token);
+	token = new state.Token('font_open', 'font', 1);
+	token.attrs = [['color', 'orange']];
+	buffer.push(token);
+	token = new state.Token('strong_open', 'strong', 1);
+	buffer.push(token);
 	token = new state.Token('text', '', 0);
 	token.content = matches[2];
 	buffer.push(token);
-    if(matches[1]){
+	if(matches[1]){
 		token = new state.Token('href_close', 'a', -1);
 		buffer.push(token);
-    }
-    token = new state.Token('strong_close', 'strong', -1);
-    buffer.push(token);
-    token = new state.Token('font_close', 'font', -1);
-    token.attrs = [['color', color]];
-    buffer.push(token);
+	}
+	token = new state.Token('strong_close', 'strong', -1);
+	buffer.push(token);
+	token = new state.Token('font_close', 'font', -1);
+	token.attrs = [['color', color]];
+	buffer.push(token);
 }
+
+function viggleFonts(buffer, matches, state){
+	let token = new state.Token('icon_open', 'i', 1);
+	token.attrs = [['class', 'vri-' + matches[1] ]];
+	buffer.push(token);
+	token = new state.Token('icon_close', 'i', -1);
+	buffer.push(token);
+}
+function FontAwesome(buffer, matches, state){
+	let token = new state.Token('icon_open', 'i', 1);
+	token.attrs = [['class', 'fa fa-' + matches[1] ]];
+	buffer.push(token);
+	token = new state.Token('icon_close', 'i', -1);
+	buffer.push(token);
+}
+
 export function setup(helper) {
 	helper.whiteList([ 
 		'span[volunteer]',
@@ -187,21 +202,27 @@ export function setup(helper) {
 	});
 
 	helper.registerPlugin(md => {
-		// const ruler = md.core.textPostProcess.ruler;
+		const ruler = md.core.textPostProcess.ruler;
 
 		ruler.push('volunteer-buttons', {
 			matcher: /\[(vs|vt):([A-Z]{2}\d{12})(?::([A-Za-z0-9_-]+))?\]/,
 			onMatch: addButton
 		});
-
 		ruler.push('soundDetails', {
 			matcher: /\[sound:(\d\d?[xX])?\:?([0-9]+)?\]/,
 			onMatch: soundDetails
 		});
-
 		ruler.push('triviaDetails', {
 			matcher: /\[trivia(?::(.*?))?\](.*?)\[\/trivia\]/,
 			onMatch: triviaDetails
+		});
+		ruler.push('viggleFonts', {
+			matcher: /\[vr:([0-9a-z-]+)\]/,
+			onMatch: viggleFonts
+		});
+		ruler.push('FontAwesome', {
+			matcher: /\[fa:([a-z-]+)\]/,
+			onMatch: FontAwesome
 		});
 	});
 }

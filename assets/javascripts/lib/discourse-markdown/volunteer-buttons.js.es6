@@ -123,11 +123,11 @@ export function setup(helper) {
   });
 
   helper.registerPlugin(md=>{
-    const buttons = {
+    const rule = {
       matcher: /^\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
       onMatch: buttonize
     };
-    md.core.ruler.push('volunteer-buttons', buttons);
+    md.core.ruler.push('volunteer-buttons', rule);
 
   });
 }

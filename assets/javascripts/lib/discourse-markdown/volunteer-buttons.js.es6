@@ -5,7 +5,7 @@ registerOption((siteSettings, opts) => {
 });
 
 function addButton(buffer, matches, state) {
-  console.log(matches);
+  console.log('matched');
   console.log(matches);
   let type  = matches[1];
   let show  = matches[2];
@@ -129,13 +129,13 @@ export function setup(helper) {
 
   helper.registerPlugin(md => {
     md.core.textPostProcess.ruler.push('volunteerbuttons', {
-       matcher: /\[(vs|vt)\:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
+       matcher: /\[(vs|vt)\:([a-z]{2}\d{12})(?:\:([a-z0-9_-]))?\]/,
        onMatch: addButton
     });
     md.core.textPostProcess.ruler.push('triviaDetails', {
        matcher: /^\[trivia(?:\:(.*?))?\](.*?)\[\/trivia\]/,
        onMatch: function addButton(buffer, matches, state) {
-        console.log(matches);
+        console.log(matched);
        }
     });
   });

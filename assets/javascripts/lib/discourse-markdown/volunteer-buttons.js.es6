@@ -127,7 +127,7 @@ export function setup(helper) {
       matcher: /^\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
       onMatch: buttonize
     };
-    md.inline.bbcode.ruler.push('volunteer-buttons', buttons);
+    md.core.ruler.push('volunteer-buttons', buttons);
 
   });
 }

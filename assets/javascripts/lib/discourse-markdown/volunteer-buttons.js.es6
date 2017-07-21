@@ -128,11 +128,11 @@ export function setup(helper) {
 
   helper.registerPlugin(md => {
     const buttons = {
-      matcher: /\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
+      //matcher: /\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
+      matcher: /\[vs:([a-z]{2}\d{12})\]/i,
       onMatch: addButton
     };
-    console.log(buttons);
-    md.block.bbcode.ruler.push('volunteer-buttons', buttons);
+    md.core.textPostProcess.ruler.push('volunteer-buttons', buttons);
 
   });
 }

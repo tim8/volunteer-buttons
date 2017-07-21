@@ -51,7 +51,7 @@ function addButton(buffer, matches, state)
 		];
 		buffer.push(token);
 		token = new state.Token('text', '', 0);
-		token.content = '@'+username;
+		token.content = '@'+user;
 		buffer.push(token);
 		token = new state.Token('mention_close', tag, -1);
 		buffer.push(token);

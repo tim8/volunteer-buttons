@@ -183,8 +183,7 @@ export function setup(helper) {
 		'span.chcklst-box fa fa-minus-square-o',
 		'span.chcklst-box checked fa fa-check-square',
 		'span.chcklst-box checked fa fa-check-square-o',
-		'i[class]',
-		'font[color]'
+		'i[class]'
 	]);
 	helper.whiteList({
 		custom(tag, name, value) {

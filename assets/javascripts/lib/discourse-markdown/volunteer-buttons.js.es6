@@ -149,7 +149,6 @@ function triviaDetails(buffer, matches, state){
 	token = new state.Token('strong_close', 'strong', -1);
 	buffer.push(token);
 	token = new state.Token('font_close', 'font', -1);
-	token.attrs = [['color', color]];
 	buffer.push(token);
 }
 

@@ -89,7 +89,7 @@ function addButton(buffer, matches, state)
 function soundDetails(buffer, matches, state)
 {
 	if(matches[1] > 2){
-			let color = 'red';
+		let color = 'red';
 	}else{
 		let color   = 'gray';
 	}
@@ -116,10 +116,40 @@ function soundDetails(buffer, matches, state)
 		token = new state.Token('strong_close', 'strong', -1);
 		buffer.push(token);
 		token = new state.Token('font_close', 'font', -1);
-		token.attrs = [['color', color]];
-	buffer.push(token);
+		buffer.push(token);
 }
-
+function triviaDetails(buffer, matches, state){
+    token = new state.Token('icon_open', 'i', 1);
+    token.attrs = [['class', 'vri-live']];
+    buffer.push(token);
+    token = new state.Token('icon_close', 'i', -1);
+    buffer.push(token);
+	token = new state.Token('text', '', 0);
+	token.content = ' ';
+	buffer.push(token);
+	if(matches[1]){
+		token = new state.Token('href_open', 'a', 1);
+		token.attrs = [['href', '//vigglerumors.com/trivia/' + matches[1]]];
+		buffer.push(token);
+	}
+    token = new state.Token('font_open', 'font', 1);
+    token.attrs = [['color', 'orange']];
+    buffer.push(token);
+    token = new state.Token('strong_open', 'strong', 1);
+    buffer.push(token);
+	token = new state.Token('text', '', 0);
+	token.content = matches[2];
+	buffer.push(token);
+    if(matches[1]){
+		token = new state.Token('href_close', 'a', -1);
+		buffer.push(token);
+    }
+    token = new state.Token('strong_close', 'strong', -1);
+    buffer.push(token);
+    token = new state.Token('font_close', 'font', -1);
+    token.attrs = [['color', color]];
+    buffer.push(token);
+}
 export function setup(helper) {
 	helper.whiteList([ 
 		'span[volunteer]',
@@ -165,6 +195,11 @@ export function setup(helper) {
 		ruler.push('soundDetails', {
 			matcher: /\[sound:(\d\d?[xX])?\:?([0-9]+)?\]/,
 			onMatch: soundDetails
+		});
+
+		ruler.push('triviaDetails', {
+			matcher: /\[trivia(?::(.*?))?\](.*?)\[\/trivia\]/,
+			onMatch: triviaDetails
 		});
 	});
 }

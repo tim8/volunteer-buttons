@@ -106,12 +106,12 @@ function soundDetails(buffer, matches, state)
 	buffer.push(token);
 	if(matches[1]){
 		token = new state.Token('text', '', 0);
-		token.content = matches[1] + ' ';
+		token.content = ' ' + matches[1];
 		buffer.push(token);
 	}
 	if(matches[2]){
 		token = new state.Token('text', '', 0);
-		token.content = '(' + matches[2] + ' pts)';
+		token.content = ' (' + matches[2] + ' pts)';
 		buffer.push(token);
 	}
 	token = new state.Token('strong_close', 'strong', -1);

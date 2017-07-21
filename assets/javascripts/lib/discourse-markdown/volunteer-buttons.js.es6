@@ -127,7 +127,7 @@ export function setup(helper) {
   });
 
     md.core.textPostProcess.ruler.push('volunteer-buttons', {
-       matcher: /\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i
+       matcher: /\[vs:([a-z]{2}\d{12})(?:\:([a-z0-9_-]+))?\]/i,
        onMatch: addButton
     });
 }

@@ -40,8 +40,10 @@ function addButton(buffer, matches, state) {
     ];
     buffer.push(token);
 
-    token = new state.Token('icon', 'i', 0);
+    token = new state.Token('icon_open', 'i', 1);
     token.attrs = [['class', icon]];
+    buffer.push(token);
+    token = new state.Token('icon_close', 'i', -1);
     buffer.push(token);
 
 
@@ -76,12 +78,14 @@ function addButton(buffer, matches, state) {
     ];
     buffer.push(token);
 
-    token = new state.Token('icon', 'i', 0);
+    token = new state.Token('icon_open', 'i', 1);
     token.attrs = [['class', icon]];
+    buffer.push(token);
+    token = new state.Token('icon_close', 'i', -1);
     buffer.push(token);
 
     token = new state.Token('text', '', 0);
-    token.content = 'Volunteer';
+    token.content = ' Volunteer';
     buffer.push(token);
 
     token = new state.Token('buttton_close', tag, -1);

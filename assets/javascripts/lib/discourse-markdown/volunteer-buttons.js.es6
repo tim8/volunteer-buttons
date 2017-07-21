@@ -131,7 +131,7 @@ export function setup(helper) {
 
   helper.registerPlugin(md => {
     md.core.textPostProcess.ruler.push('volunteerbuttons', {
-       matcher: /\[(vs|vt|VS|VT):([a-zA-Z]{2}\d{12})(?::([A-Za-z0-9_-]))?\]/,
+       matcher: /\[(vs|vt|VS|VT)\:([a-zA-Z]{2}\d{12})(?:\:([A-Za-z0-9_-]))?\]/,
        onMatch: addButton
     });
   });

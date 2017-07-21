@@ -130,11 +130,5 @@ export function setup(helper) {
        matcher: /\[(vs|vt):([A-Z]{2}\d{12})(?::([A-Za-z0-9_-]))?\]/,
        onMatch: addButton
     });
-    md.core.textPostProcess.ruler.push('triviaDetails', {
-       matcher: /^\[trivia(?:\:(.*?))?\](.*?)\[\/trivia\]/,
-       onMatch: function addButton(buffer, matches, state) {
-        console.log(matched);
-       }
-    });
   });
 }

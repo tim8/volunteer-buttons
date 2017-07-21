@@ -10,7 +10,8 @@ function buttonize(buffer, matches, state) {
   let show  = matches[2];
   let tag   = 'button';
   let icon  = null;
-
+  let token;
+  
   if(type === 'vs'){
     type  = 'sound';
     icon  = 'vri-tv-v';

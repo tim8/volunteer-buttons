@@ -140,9 +140,14 @@ function triviaDetails(buffer, matches, state){
 	token = new state.Token('strong_open', 'strong', 1);
 	buffer.push(token);
 	token = new state.Token('text', '', 0);
-	token.content = matches[2];
+	token.content = matches[2] + ' ';
 	buffer.push(token);
 	if(matches[1]){
+		token = new state.Token('icon_open', 'i', 1);
+		token.attrs = [['class', 'fa fa-external-lin']];
+		buffer.push(token);
+		token = new state.Token('icon_close', 'i', -1);
+		buffer.push(token);
 		token = new state.Token('href_close', 'a', -1);
 		buffer.push(token);
 	}
@@ -177,12 +182,6 @@ export function setup(helper) {
 		'button[user]',
 		'button.btn btn-small volunteer-button',
 		'button.btn btn-small volunteer-button volunteered',
-		'span.chcklst-stroked',
-		'span.chcklst-box fa fa-square-o',
-		'span.chcklst-box fa fa-square',
-		'span.chcklst-box fa fa-minus-square-o',
-		'span.chcklst-box checked fa fa-check-square',
-		'span.chcklst-box checked fa fa-check-square-o',
 		'i[class]'
 	]);
 	helper.whiteList({

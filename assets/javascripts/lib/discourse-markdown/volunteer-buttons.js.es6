@@ -88,37 +88,39 @@ function addButton(buffer, matches, state)
 
 function soundDetails(buffer, matches, state)
 {
+	let token;
 	if(matches[1] > 2){
 		let color = 'red';
 	}else{
 		let color   = 'gray';
 	}
-		token = new state.Token('icon_open', 'i', 1);
-		token.attrs = [['class', 'vri-tv-v']];
+	token = new state.Token('icon_open', 'i', 1);
+	token.attrs = [['class', 'vri-tv-v']];
+	buffer.push(token);
+	token = new state.Token('icon_close', 'i', -1);
+	buffer.push(token);
+	token = new state.Token('font_open', 'font', 1);
+	token.attrs = [['color', color]];
+	buffer.push(token);
+	token = new state.Token('strong_open', 'strong', 1);
+	buffer.push(token);
+	if(matches[1]){
+		token = new state.Token('text', '', 0);
+		token.content = matches[1] + ' ';
 		buffer.push(token);
-		token = new state.Token('icon_close', 'i', -1);
+	}
+	if(matches[2]){
+		token = new state.Token('text', '', 0);
+		token.content = '(' + matches[2] + ' pts)';
 		buffer.push(token);
-		token = new state.Token('font_open', 'font', 1);
-		token.attrs = [['color', color]];
-		buffer.push(token);
-		token = new state.Token('strong_open', 'strong', 1);
-		buffer.push(token);
-		if(matches[1]){
-			token = new state.Token('text', '', 0);
-			token.content = matches[1] + ' ';
-			buffer.push(token);
-		}
-		if(matches[2]){
-			token = new state.Token('text', '', 0);
-			token.content = '(' + matches[2] + ' pts)';
-			buffer.push(token);
-		}
-		token = new state.Token('strong_close', 'strong', -1);
-		buffer.push(token);
-		token = new state.Token('font_close', 'font', -1);
-		buffer.push(token);
+	}
+	token = new state.Token('strong_close', 'strong', -1);
+	buffer.push(token);
+	token = new state.Token('font_close', 'font', -1);
+	buffer.push(token);
 }
 function triviaDetails(buffer, matches, state){
+	let token;
     token = new state.Token('icon_open', 'i', 1);
     token.attrs = [['class', 'vri-live']];
     buffer.push(token);
@@ -185,7 +187,7 @@ export function setup(helper) {
 	});
 
 	helper.registerPlugin(md => {
-		const ruler = md.core.textPostProcess.ruler;
+		// const ruler = md.core.textPostProcess.ruler;
 
 		ruler.push('volunteer-buttons', {
 			matcher: /\[(vs|vt):([A-Z]{2}\d{12})(?::([A-Za-z0-9_-]+))?\]/,

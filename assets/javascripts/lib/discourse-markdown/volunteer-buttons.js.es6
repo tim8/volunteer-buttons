@@ -5,7 +5,7 @@ registerOption((siteSettings, opts) => {
 });
 
 function addButton(buffer, matches, state) {
-  console.log('matched');
+  console.log(matches);
   console.log(matches);
   let type  = matches[1];
   let show  = matches[2];
@@ -134,7 +134,9 @@ export function setup(helper) {
     });
     md.core.textPostProcess.ruler.push('triviaDetails', {
        matcher: /^\[trivia(?:\:(.*?))?\](.*?)\[\/trivia\]/,
-       onMatch: console.log('matched')
+       onMatch: function addButton(buffer, matches, state) {
+        console.log(matches);
+       }
     });
   });
 }

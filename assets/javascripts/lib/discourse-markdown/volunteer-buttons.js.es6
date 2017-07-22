@@ -143,10 +143,10 @@ function triviaDetails(buffer, matches, state){
 	token.content = matches[2] + ' ';
 	buffer.push(token);
 	if(matches[1]){
-		token = new state.Token('icon_open', 'i', 1);
-		token.attrs = [['class', 'fa fa-external-lin']];
+		token = new state.Token('ext_open', 'i', 1);
+		token.attrs = [['class', 'fa fa-external-link']];
 		buffer.push(token);
-		token = new state.Token('icon_close', 'i', -1);
+		token = new state.Token('ext_close', 'i', -1);
 		buffer.push(token);
 		token = new state.Token('href_close', 'a', -1);
 		buffer.push(token);

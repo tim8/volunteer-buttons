@@ -89,7 +89,7 @@ function soundDetails(buffer, matches, state)
 	let token;
 	let color;
 	if(matches[1] > 2){
-		color = 'red';
+		color 	= 'red';
 	}else{
 		color   = 'gray';
 	}
